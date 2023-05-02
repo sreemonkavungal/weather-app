@@ -1,0 +1,92 @@
+<html>
+
+<head>
+
+    <title>
+        Weather App
+    </title>
+    <link rel="stylesheet" href="./css/styles-assignment2.css">
+
+    <style>
+    </style>
+
+</head>
+
+<body>
+    <div class="maindiv">
+        <h1 class="header">Weather App</h1>
+        <label class="label-name">Enter City Name:</label>
+        <input id="input-city" class="input-box" type="text" placeholder="Enter City">
+        <br><br>
+        <button id="btn" class="mybtn">Search</button>
+        <br><br>
+        <h2 id="hed" style="display: none;" class="weather-title">City-Climate</h2>
+        <br>
+        <h5 id="temp" style="display: none;" class="coords">Temperature</h5>
+    
+        <h5 id="humi" style="display: none;" class="coords">Humidity</h5>
+        <br><br>
+        <img src="./img/loader.gif" style="display: none;" class="image-loader" id="loader" alt="loader-image">
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#btn").click(function () {
+
+                    var city = $("#input-city").val();
+
+
+                    $.ajax({
+                        url: "https://api.openweathermap.org/data/2.5/weather",
+                        method: "GET",
+                        data: {
+                            q: city,
+                            appid: "344e7df08961149af6d7616bcf5d8ae2"
+
+                        },
+
+                        success: function (response) {
+
+                            $("#hed").show();
+                            $("#loader").hide();
+                            $("#temp").show();
+                            $("#humi").show();
+                            console.log(response.weather[0].description);
+                            $("#hed").html("climate:"+response.weather[0].description);
+                            
+                            //console.log(response.coord.lon);
+                            //console.log(response.coord.lat);
+
+                            console.log("Temperature:"+response.main.temp+ "Celsius");
+                            console.log("Humidity:"+response.main.humidity+ "%");
+
+                            $("#temp").html("Temperature:"+response.main.temp+"Celsius");
+                            $("#humi").html("Humidity:"+response.main.humidity+"%");
+                            
+
+                        },
+                        error: function (error) {
+
+                            console.log(error.status)
+                            if (error.status == 404) {
+                                $("#hed").hide();
+                                $("#loader").show();
+                                $("#temp").hide();
+                                $("#humi").hide();
+                                alert("City Not Found");
+                            }
+                        }
+                    
+
+                    });
+ 
+
+                });
+            });
+
+        </script>
+
+    </div>
+
+</body>
+
+</html>
