@@ -11,4 +11,5 @@ OpenWeatherMap API
 click to visit website : https://sreemonkavungal.github.io/weather-app/
 
 
+
 ![WeatherApp](https://github.com/sreemonkavungal/weather-app/assets/90373393/a3e9f529-698c-4b37-93e9-52a2ff9b40e6)
